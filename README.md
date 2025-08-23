@@ -205,50 +205,6 @@ SELECT
 FROM cte;
 ```
 
-## Installation and Setup
-
-1. **Prerequisites**
-   - PostgreSQL database server
-   - Appropriate database permissions for creating tables, functions, and views
-
-2. **Database Setup**
-   ```sql
-   -- Create the main table
-   CREATE TABLE pan_project (Pan_Numbers TEXT);
-   
-   -- Import your data from Excel file
-   -- Run all function definitions and view creation queries
-   ```
-
-3. **Data Import**
-   - Load your PAN number data from `PAN Number Validation Dataset.xlsx`
-   - Ensure data is imported into the `Pan_Numbers` column
-
-## Usage Examples
-
-**View All Results:**
-```sql
-SELECT * FROM vw_valid_invalid_pans ORDER BY pan_number;
-```
-
-**Count Valid vs Invalid:**
-```sql
-SELECT status, COUNT(*) as count
-FROM vw_valid_invalid_pans 
-GROUP BY status;
-```
-
-**Test Custom Functions:**
-```sql
--- Test adjacent character detection
-SELECT check_adj_char('AABCD'); -- Returns true (invalid)
-SELECT check_adj_char('AXBCD'); -- Returns false (valid)
-
--- Test sequential character detection
-SELECT check_sqen_char('ABCDE'); -- Returns true (invalid sequence)
-SELECT check_sqen_char('ABCDX'); -- Returns false (valid)
-```
-
 ## Data Quality Issues Identified
 
 - **Missing Data**: *965 null records* identified and handled
@@ -256,11 +212,6 @@ SELECT check_sqen_char('ABCDX'); -- Returns false (valid)
 - **Formatting Issues**: *9 records* with trailing/leading spaces
 - **Case Inconsistencies**: *990 records* with incorrect letter casing
 
-## Technical Requirements
-
-- **PostgreSQL 9.1+** (for plpgsql functions)
-- Database user with **CREATE permissions** for functions and views
-- Excel file processing capability for initial data import
 
 ## Project Results
 
@@ -275,6 +226,4 @@ The system successfully processes the entire dataset and provides:
 
 Feel free to submit issues, feature requests, or pull requests to improve the validation logic or add new data quality checks.
 
-## License
 
-This project is available under the **MIT License**.
